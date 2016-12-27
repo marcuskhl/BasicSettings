@@ -1,5 +1,5 @@
 list.of.packages <- c("XML", "rvest", "Hmisc", "MASS","RevoUtilsMath", "RevoUtils","sparkTable",
-                     "rio", "psych","readr","data.table","magrittr","sparklyr",
+                     "rio", "psych","readr","data.table","magrittr","sparklyr", "Rfacebook","RColorBrewer","RCurl","httpuv","httr","rjson",
                       "shiny","flexdashboard","gmodels","janitor", 
                       "foreach","profvis","sqldf","reshape2","dplyr","zoo",
                       "scales","RODBC", "readxl","openxlsx","doParallel","dplyr","tidyr")
