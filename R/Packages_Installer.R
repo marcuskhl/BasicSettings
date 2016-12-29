@@ -8,7 +8,7 @@ update.packages(installed.packages()[,"Package"])
 if(length(new.packages)) install.packages(new.packages)
 lapply(list.of.packages, library, character.only = TRUE)
 
-cl <- makeCluster(2)
+cl <- makeCluster(4)
 registerDoParallel(cl)
 
 cat("\014")
