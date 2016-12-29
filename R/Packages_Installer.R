@@ -1,4 +1,6 @@
-list.of.packages <- c("XML", "rvest", "Hmisc", "MASS","RevoUtilsMath", "RevoUtils","sparkTable",
+list.of.packages <- c("XML", "rvest", "Hmisc", "MASS",
+                      #"RevoUtilsMath", "RevoUtils",
+                      "sparkTable",
                      "rio", "psych","readr","data.table","magrittr","sparklyr", "Rfacebook","RColorBrewer","RCurl","httpuv","httr","rjson",
                       "shiny","flexdashboard","gmodels","janitor", "caret","ROCR",
                       "foreach","profvis","sqldf","reshape2","dplyr","zoo",
@@ -8,7 +10,7 @@ update.packages(installed.packages()[,"Package"])
 if(length(new.packages)) install.packages(new.packages)
 lapply(list.of.packages, library, character.only = TRUE)
 
-cl <- makeCluster(4)
+cl <- makeCluster(2)
 registerDoParallel(cl)
 
 cat("\014")
