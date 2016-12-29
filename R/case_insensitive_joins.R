@@ -1,6 +1,6 @@
 # this is what the original Access DB is doing to join the two tables, Access is not case sensitive so i found this case insensitive join on the internet
 # https://gist.github.com/jimhester/a060323a05b40c6ada34
-insensitive <- function(fun = inner_join) {
+insensitive.join <- function(fun = inner_join) {
   new_fun <- fun
   body(new_fun) <- substitute({
     by <- dplyr:::common_by(by, x, y)
