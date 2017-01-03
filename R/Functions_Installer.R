@@ -14,7 +14,4 @@ column.rm <- function(df,col_name){
   return(df)
 }
 
-
-
-
 print("Functions Loaded")
