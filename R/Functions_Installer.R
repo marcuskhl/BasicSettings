@@ -59,7 +59,7 @@ save.xlsx <- function (file, ...)
 # range_match = F
 df.name.change <- function(df, original_names, new_names, range_match = F){
   fn_flag <- F
-  if (class(df)==1){
+  if (class(df)[1]==1){
     df <- as.df(df)
     fn_flag <- T
   }
