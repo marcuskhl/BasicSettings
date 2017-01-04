@@ -13,7 +13,7 @@ cl <- makeCluster(4)
 registerDoParallel(cl)
 
 
-if(!is.na(try(Revo.version$version.string, silent = T))){
+if(!is.na( match("Revo.version", ls(.BaseNamespaceEnv)))){
   list.of.packages <- c("RevoUtilsMath", "RevoUtils")
   new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
   update.packages(installed.packages()[,"Package"])
