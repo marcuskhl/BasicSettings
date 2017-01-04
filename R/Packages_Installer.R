@@ -1,5 +1,4 @@
 list.of.packages <- c("XML", "rvest", "Hmisc", "MASS",
-                      #"RevoUtilsMath", "RevoUtils",
                       "sparkTable","jsonlite",
                      "rio", "psych","readr","data.table","magrittr","sparklyr", "Rfacebook","RColorBrewer","RCurl","httpuv","httr","rjson",
                       "shiny","flexdashboard","gmodels","janitor", "caret","ROCR",
@@ -12,6 +11,16 @@ lapply(list.of.packages, library, character.only = TRUE)
 
 cl <- makeCluster(4)
 registerDoParallel(cl)
+
+
+if(!is.na(Revo.version)){
+  list.of.packages <- c("RevoUtilsMath", "RevoUtils")
+  new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+  update.packages(installed.packages()[,"Package"])
+  if(length(new.packages)) install.packages(new.packages)
+  lapply(list.of.packages, library, character.only = TRUE)
+  setMKLthreads(4)
+}
 
 cat("\014")
 print("Libraries Loaded")
