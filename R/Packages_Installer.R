@@ -13,7 +13,7 @@ cl <- makeCluster(4)
 registerDoParallel(cl)
 
 
-if(!is.na(Revo.version)){
+if(!is.na(try(Revo.version$version.string, silent = T))){
   list.of.packages <- c("RevoUtilsMath", "RevoUtils")
   new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
   update.packages(installed.packages()[,"Package"])
@@ -21,6 +21,8 @@ if(!is.na(Revo.version)){
   lapply(list.of.packages, library, character.only = TRUE)
   setMKLthreads(4)
 }
+
+
 
 cat("\014")
 print("Libraries Loaded")
