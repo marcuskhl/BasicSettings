@@ -12,7 +12,7 @@ as.df <- function(dt){
 #' @param df an object of class data.table
 #' @export
 as.dt <- function(df){
-  as.data.table(dt)
+  as.data.table(df)
 }
 
 
