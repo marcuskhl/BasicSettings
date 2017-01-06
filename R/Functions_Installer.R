@@ -28,7 +28,7 @@ f2n <- function(col){
 
 
 # This function converts factor column to char
-f2n <- function(col){
+f2c <- function(col){
   return(as.character(col))
 }
 
