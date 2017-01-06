@@ -14,4 +14,7 @@ serial.joiner(fun = inner_join, list_of_df)
 \description{
 this function join multiple dfs using dplyr
 }
+\examples{
+df <- insensitive.join(left_join, list(df_x,df_y,df_z))
+}
 

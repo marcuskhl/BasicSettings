@@ -116,3 +116,4 @@ df.name.change <- function(df, original_names, new_names, range_match = F){
   if(fn_flag){return(as.dt(df))}else{return(df)}
 }
 
+#' @export BasicSettings
