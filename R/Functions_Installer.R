@@ -2,7 +2,7 @@
 
 #' shorter version of as.data.frame
 #' @param dt an object of class data.table
-#' @export BasicSettings
+#' @export
 as.df <- function(dt){
   as.data.frame(dt)
 }
