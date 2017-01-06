@@ -23,3 +23,4 @@ insensitive.join <- function(fun = inner_join) {
 
   new_fun
 }
+#' @export BasicSettings

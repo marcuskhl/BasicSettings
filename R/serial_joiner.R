@@ -10,3 +10,4 @@ serial.joiner <- function(fun = inner_join, list_of_df) {
                          list_of_df)
     return(huge_table)
 }
+#' @export BasicSettings

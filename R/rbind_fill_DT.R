@@ -15,3 +15,4 @@ rbind.fill.DT <- function(ll) {
     setcolorder(tt, unq.names)
   }))
 }
+#' @export BasicSettings

@@ -110,5 +110,5 @@ df.name.change <- function(df, original_names, new_names, range_match = F){
 }
 
 
-
+#' @export BasicSettings
 

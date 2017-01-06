@@ -15,4 +15,4 @@ read.dem.sheets <- function(file_path,sheetnames){
   return(ldata)
 
 }
-
+#' @export BasicSettings
