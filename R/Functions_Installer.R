@@ -27,6 +27,13 @@ f2n <- function(col){
 
 
 
+# This function converts factor column to char
+f2n <- function(col){
+  return(as.character(col))
+}
+
+
+
 # This function saves multiple dfs into one workbook
 save.xlsx <- function (file, ...)
 {

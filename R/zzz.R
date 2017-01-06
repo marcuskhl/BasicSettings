@@ -14,8 +14,8 @@
 
   cl <- makeCluster(2)
   registerDoParallel(cl)
-
+  options(digits=15)
   cat("\014")
   print("Libraries Loaded")
-
+  
 }
