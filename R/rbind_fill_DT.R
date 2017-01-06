@@ -2,6 +2,7 @@
 #' @param ll list of data frames
 #' @examples
 #' huge_df <- rbind.fill.DT(list_of_dfs)
+#' @export BasicSettings
 rbind.fill.DT <- function(ll) {
   # changed sapply to lapply to return a list always
   all.names <- lapply(ll, names)
@@ -15,4 +16,4 @@ rbind.fill.DT <- function(ll) {
     setcolorder(tt, unq.names)
   }))
 }
-#' @export BasicSettings
+
