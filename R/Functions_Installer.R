@@ -10,7 +10,7 @@ as.df <- function(dt){
 
 #' shorter version of as.data.table
 #' @param df an object of class data.table
-#' @export BasicSettings
+#' @export
 as.dt <- function(df){
   as.data.table(dt)
 }
@@ -22,7 +22,7 @@ as.dt <- function(df){
 #' @param df a data frame
 #' @param col_name 1 or multiple concatenated column names
 #' @return returns the data frame without the specified columns
-#' @export BasicSettings
+#' @export
 column.rm <- function(df,col_name){
   df <- df[,-match(col_name,names(df))]
   return(df)
@@ -34,7 +34,7 @@ column.rm <- function(df,col_name){
 #' @param col the column in a data frame
 #' @examples
 #' x$abc <- f2n(x$abc)
-#' @export BasicSettings
+#' @export
 f2n <- function(col){
 	return(as.numeric(as.character(col)))
 }
@@ -45,7 +45,7 @@ f2n <- function(col){
 #' #' @param col the column in a data frame
 #' @examples
 #' x$abc <- f2c(x$abc)
-#' @export BasicSettings
+#' @export
 f2c <- function(col){
   return(as.character(col))
 }
@@ -60,7 +60,7 @@ local({
 #' The sheet names will be the variable names
 #' @param file file path you wish to write to
 #' @param ... list of dfs you wish to write
-#' @export BasicSettings
+#' @export
 save.xlsx <- function (file, ...)
 {
   wb <- createWorkbook()
@@ -95,7 +95,7 @@ save.xlsx <- function (file, ...)
 #' original_names <- c("mpg","disp","wt")
 #' new_names <- c("test1","test2","test3")
 #' range_match = F
-#' @export BasicSettings
+#' @export
 df.name.change <- function(df, original_names, new_names, range_match = F){
   fn_flag <- F
   if (class(df)[1]==1){

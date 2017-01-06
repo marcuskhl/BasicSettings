@@ -2,7 +2,7 @@
 #' https://gist.github.com/jimhester/a060323a05b40c6ada34
 #' @examples
 #' df <- insensitive.join(left_join)(df_x, df_y, by = list(x = c(), y = c()))
-#' @export BasicSettings
+#' @export
 insensitive.join <- function(fun = inner_join) {
   new_fun <- fun
   body(new_fun) <- substitute({

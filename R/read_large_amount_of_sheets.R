@@ -2,7 +2,7 @@
 #' @param file_path path of .xlsx files
 #' @param sheetnames an array of sheet names you want to read
 #' @return returns a list of data.frames of the sheets read
-#' @export BasicSettings
+#' @export
 
 read.dem.sheets <- function(file_path,sheetnames){
 
