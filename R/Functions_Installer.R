@@ -122,6 +122,19 @@ df.name.change <- function(df, original_names, new_names, range_match = F, fixed
   if(fn_flag){return(as.dt(df))}else{return(df)}
 }
 
-
+#' This is a piper for functions
+#' @param ... the functions you want to pipe 
+#' @return returns a custom function that executes all the functions in reversed order
+#' @examples 
+#' #' custom_fn <- fn.piper(length, unique)
+#' custom_fn(rep(1:5, 1:5)) would be 5
+#' 
+#' custom_fn <- fn.piper(is.numeric, length, unique)
+#' custom_fn(rep(1:5, 1:5)) would be TRUE
+#' 
+#' @export
+fn.piper <- function(...){
+  return(compose(...))
+}
 
 #' @export BasicSettings
