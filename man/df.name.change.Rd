@@ -4,7 +4,8 @@
 \alias{df.name.change}
 \title{This function changes multiple colnames of a df there is a range match option}
 \usage{
-df.name.change(df, original_names, new_names, range_match = F)
+df.name.change(df, original_names, new_names, range_match = F, fixed = F,
+  invert = F)
 }
 \arguments{
 \item{df}{a data.frame}
@@ -14,6 +15,10 @@ df.name.change(df, original_names, new_names, range_match = F)
 \item{new_names}{a target colname/ an array of target colnames, must match the number of names in original_names}
 
 \item{range_match}{just like in Excel match(,,1), default is False}
+
+\item{fixed:}{only applicable if range_match = T, used in grep, please see grep for purpose}
+
+\item{invert:}{only applicable if range_match = T, used in grep, please see grep for purpose, essentially making original_names columns you do not want to change name}
 }
 \description{
 This function changes multiple colnames of a df there is a range match option
