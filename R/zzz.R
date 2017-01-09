@@ -16,4 +16,5 @@
 .onAttach <- function(...) {
   packageStartupMessage("Libraries Loaded\n")
   packageStartupMessage("Functions Loaded\n")
+  packageStartupMessage("Keep Calm and Drink Basket Pressed Shiraz :)\n")
 }
