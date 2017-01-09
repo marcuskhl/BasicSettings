@@ -84,6 +84,8 @@ save.xlsx <- function (file, ...)
 #' @param original_names a colname/ an array of colnames you want to change
 #' @param new_names a target colname/ an array of target colnames, must match the number of names in original_names
 #' @param range_match just like in Excel match(,,1), default is False
+#' @param fixed: only applicable if range_match = T, used in grep, please see grep for purpose
+#' @param invert: only applicable if range_match = T, used in grep, please see grep for purpose, essentially making original_names columns you do not want to change name
 #' @examples
 #' range_match True test data set
 #' df <- flat_data
@@ -96,17 +98,21 @@ save.xlsx <- function (file, ...)
 #' new_names <- c("test1","test2","test3")
 #' range_match = F
 #' @export
-df.name.change <- function(df, original_names, new_names, range_match = F){
+df.name.change <- function(df, original_names, new_names, range_match = F, fixed = F, invert = F){
   fn_flag <- F
   if (class(df)[1]==1){
     df <- as.df(df)
     fn_flag <- T
   }
   if (range_match){
-    if(length(grep(paste(original_names,collapse="|"), names(df), value = T))!= length(new_names)){
-      print("#' of matched names not equal to #' of new names")
+    if(invert){
+      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
+    }else{
+      if(length(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert))!= length(new_names)){
+        print("#' of matched names not equal to #' of new names")
+      }
+      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
     }
-    names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T), names(df))] <- new_names
   }else{
     if(length(match(original_names, names(df)))!= length(new_names)){
       print("#' of matched names not equal to #' of new names")
@@ -114,6 +120,21 @@ df.name.change <- function(df, original_names, new_names, range_match = F){
     names(df)[match(original_names, names(df))] <- new_names
   }
   if(fn_flag){return(as.dt(df))}else{return(df)}
+}
+
+#' This is a piper for functions
+#' @param ... the functions you want to pipe 
+#' @return returns a custom function that executes all the functions in reversed order
+#' @examples 
+#' #' custom_fn <- fn.piper(length, unique)
+#' custom_fn(rep(1:5, 1:5)) would be 5
+#' 
+#' custom_fn <- fn.piper(is.numeric, length, unique)
+#' custom_fn(rep(1:5, 1:5)) would be TRUE
+#' 
+#' @export
+fn.piper <- function(...){
+  return(compose(...))
 }
 
 #' @export BasicSettings
