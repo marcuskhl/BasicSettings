@@ -10,11 +10,11 @@ packages.installer <- function(){
     # Rattle:
     "RGtk2","rattle",# problematic packages
     # Visualisation Tools:
-    "shiny","flexdashboard",
+    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard",
     # Data Manipulation Tools:
     "reshape2","dplyr","dplyr", "dtplyr", "tidyr", "janitor", "data.table","magrittr",# does not have reshape1
     # Modelling Tools:
-    "psych", "gmodels", "caret", "ROCR", "cluster",
+    "psych", "gmodels", "caret", "ROCR", "cluster", "broom",
     # Multithreading:
     "foreach", "doParallel",
     # Input-Output:
