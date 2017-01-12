@@ -3,6 +3,7 @@
 export(as.df)
 export(as.dt)
 export(column.rm)
+export(dev.pkgs)
 export(df.name.change)
 export(f2c)
 export(f2n)

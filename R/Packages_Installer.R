@@ -5,12 +5,7 @@ packages.installer <- function(){
     "XML", "rvest", "jsonlite", "rjson",
     # Misc Tools:
     "Hmisc", "MASS",
-    # Big Data Stuff:
-    "sparkTable", "sparklyr", "Rfacebook", "twitteR", "RCurl", "httpuv", "httr",
-    # Rattle:
-    "RGtk2","rattle",# problematic packages
-    # Visualisation Tools:
-    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard", # javascript stuff
+
     # Data Manipulation Tools:
     "reshape2","dplyr","dplyr", "dtplyr", "tidyr", "janitor", "data.table","magrittr",# does not have reshape1
     # Modelling Tools:
