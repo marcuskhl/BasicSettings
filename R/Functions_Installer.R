@@ -123,18 +123,35 @@ df.name.change <- function(df, original_names, new_names, range_match = F, fixed
 }
 
 #' This is a piper for functions
-#' @param ... the functions you want to pipe 
+#' @param ... the functions you want to pipe
 #' @return returns a custom function that executes all the functions in reversed order
-#' @examples 
+#' @examples
 #' #' custom_fn <- fn.piper(length, unique)
 #' custom_fn(rep(1:5, 1:5)) would be 5
-#' 
+#'
 #' custom_fn <- fn.piper(is.numeric, length, unique)
 #' custom_fn(rep(1:5, 1:5)) would be TRUE
-#' 
+#'
 #' @export
 fn.piper <- function(...){
   return(compose(...))
+}
+
+
+#' This function sources scripts from git_hub
+#' @param url urls
+#' @examples
+#' source_https("https://raw.github.com/tonybreyal/Blog-Reference-Functions/master/R/bingSearchXScraper/bingSearchXScraper.R",
+#' "https://raw.github.com/tonybreyal/Blog-Reference-Functions/master/R/htmlToText/htmlToText.R")
+#' @export
+source_https <- function(url, ...) {
+  # load package
+  require(RCurl)
+
+  # parse and evaluate each .R script
+  sapply(c(url, ...), function(u) {
+    eval(parse(text = getURL(u, followlocation = TRUE, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))), envir = .GlobalEnv)
+  })
 }
 
 #' @export BasicSettings
