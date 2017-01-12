@@ -20,7 +20,7 @@ packages.installer <- function(){
     # Input-Output:
     "sqldf", "RODBC", "readxl","openxlsx", "rio", "readr",
     # Misc:
-    "zoo", "profvis", "scales", "RColorBrewer", "purrr"
+    "zoo", "lubridate", "profvis", "scales", "RColorBrewer", "purrr"
   )
 
   update_and_install <- function(list.of.packages){
