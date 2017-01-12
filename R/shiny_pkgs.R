@@ -15,5 +15,6 @@ dev.pkgs <- function(){
     lapply(list.of.packages, library, character.only = TRUE)
   }
   update_and_install(list.of.packages)
-
+  cat("\014")
+  print("dev pkgs installed")
 }
