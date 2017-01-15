@@ -1,4 +1,5 @@
-#' This function is a second package installer, used only by developers
+
+#' installer, used only by developers
 #' @export
 dev.pkgs <- function(){
   list.of.packages <- c(
@@ -7,7 +8,7 @@ dev.pkgs <- function(){
     # Rattle:
     "RGtk2","rattle",# problematic packages
     # Visualisation Tools:
-    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard")
+    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard", "rsconnect", "RJSONIO")
   update_and_install <- function(list.of.packages){
     new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
     update.packages(installed.packages()[,"Package"])
@@ -17,4 +18,5 @@ dev.pkgs <- function(){
   update_and_install(list.of.packages)
   cat("\014")
   print("dev pkgs installed")
+  print("Welcome to the club")
 }
