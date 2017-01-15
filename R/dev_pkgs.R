@@ -1,5 +1,4 @@
-
-#' installer, used only by developers
+#' Seconday packages installer, used only by developers
 #' @export
 dev.pkgs <- function(){
   list.of.packages <- c(
