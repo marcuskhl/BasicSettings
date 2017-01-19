@@ -3,11 +3,14 @@
 dev.pkgs <- function(){
   list.of.packages <- c(
     # Big Data Stuff:
-    "sparkTable", "sparklyr", "Rfacebook", "twitteR", "RCurl", "httpuv", "httr",
+    "sparkTable", "sparklyr", "Rfacebook", "twitteR", "RCurl", "httpuv", "httr", "DBI",
     # Rattle:
     "RGtk2","rattle",# problematic packages
     # Visualisation Tools:
-    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard")
+    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard", "jasonlite",
+    # Advanced Web Scraping:
+    "RSelenium"
+  )
   update_and_install <- function(list.of.packages){
     new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
     update.packages(installed.packages()[,"Package"])
