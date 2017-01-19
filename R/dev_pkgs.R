@@ -7,7 +7,7 @@ dev.pkgs <- function(){
     # Rattle:
     "RGtk2","rattle",# problematic packages
     # Visualisation Tools:
-    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard", "jasonlite","rsconnect", "RJSONIO",
+    "shiny","flexdashboard", "htmlwidgets", "DT", "shinydashboard", "jsonlite","rsconnect", "RJSONIO",
     # Advanced Web Scraping:
     "RSelenium",
     # Visualisation Tools:
