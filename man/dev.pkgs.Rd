@@ -2,11 +2,11 @@
 % Please edit documentation in R/dev_pkgs.R
 \name{dev.pkgs}
 \alias{dev.pkgs}
-\title{installer, used only by developers}
+\title{Seconday packages installer, used only by developers}
 \usage{
 dev.pkgs()
 }
 \description{
-installer, used only by developers
+Seconday packages installer, used only by developers
 }
 
