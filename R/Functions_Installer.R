@@ -98,28 +98,48 @@ save.xlsx <- function (file, ...)
 #' new_names <- c("test1","test2","test3")
 #' range_match = F
 #' @export
-df.name.change <- function(df, original_names, new_names, range_match = F, fixed = F, invert = F){
+df.name.change <- function (df, original_names, new_names, range_match = F, fixed = F, invert = F) {
   fn_flag <- F
-  if (class(df)[1]==1){
+  if (class(df)[1] == 1) {
     df <- as.df(df)
     fn_flag <- T
   }
-  if (range_match){
-    if(invert){
-      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
-    }else{
-      if(length(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert))!= length(new_names)){
+  if (range_match) {
+    if (invert) {
+      names(df)[match(grep(paste(original_names, collapse = "|"), 
+                           names(df), 
+                           value = T, 
+                           fixed = fixed, invert = invert), 
+                      names(df))] <- new_names
+    }
+    else {
+      if (length(grep(paste(original_names, collapse = "|"), 
+                      names(df), value = T, fixed = fixed, invert = invert)) != length(new_names)) {
         print("#' of matched names not equal to #' of new names")
       }
-      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
+      for (i in 1: (length(original_names))){
+        names(df)[grep(original_names[i], names(df), fixed = T)] <- new_names[i]
+      }
+      # This yields the wrong order
+      # names(df)[match(grep(paste(original_names, collapse = "|"), 
+      #                      names(df), 
+      #                      value = T, 
+      #                      fixed = fixed, invert = invert), 
+      #                 names(df))] <- new_names
     }
-  }else{
-    if(length(match(original_names, names(df)))!= length(new_names)){
+  }
+  else {
+    if (length(match(original_names, names(df))) != length(new_names)) {
       print("#' of matched names not equal to #' of new names")
     }
     names(df)[match(original_names, names(df))] <- new_names
   }
-  if(fn_flag){return(as.dt(df))}else{return(df)}
+  if (fn_flag) {
+    return(as.dt(df))
+  }
+  else {
+    return(df)
+  }
 }
 
 #' This is a piper for functions
