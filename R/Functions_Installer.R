@@ -106,14 +106,14 @@ df.name.change <- function (df, original_names, new_names, range_match = F, fixe
   }
   if (range_match) {
     if (invert) {
-      names(df)[match(grep(paste(original_names, collapse = "|"), 
-                           names(df), 
-                           value = T, 
-                           fixed = fixed, invert = invert), 
+      names(df)[match(grep(paste(original_names, collapse = "|"),
+                           names(df),
+                           value = T,
+                           fixed = fixed, invert = invert),
                       names(df))] <- new_names
     }
     else {
-      if (length(grep(paste(original_names, collapse = "|"), 
+      if (length(grep(paste(original_names, collapse = "|"),
                       names(df), value = T, fixed = fixed, invert = invert)) != length(new_names)) {
         print("#' of matched names not equal to #' of new names")
       }
@@ -121,10 +121,10 @@ df.name.change <- function (df, original_names, new_names, range_match = F, fixe
         names(df)[grep(original_names[i], names(df), fixed = T)] <- new_names[i]
       }
       # This yields the wrong order
-      # names(df)[match(grep(paste(original_names, collapse = "|"), 
-      #                      names(df), 
-      #                      value = T, 
-      #                      fixed = fixed, invert = invert), 
+      # names(df)[match(grep(paste(original_names, collapse = "|"),
+      #                      names(df),
+      #                      value = T,
+      #                      fixed = fixed, invert = invert),
       #                 names(df))] <- new_names
     }
   }
@@ -172,6 +172,26 @@ source_https <- function(url, ...) {
   sapply(c(url, ...), function(u) {
     eval(parse(text = getURL(u, followlocation = TRUE, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))), envir = .GlobalEnv)
   })
+}
+
+
+
+#' Sometimes when reading in < and >, it gets encoded differently, this function fixes it
+#' @param temp_col column to perform this operation
+#' @export
+size.encoder <- function(temp_col){
+  temp_col <- gsub("&gt;", ">",temp_col, fixed = T)
+  temp_col <- gsub("&lt;", "<",temp_col, fixed = T)
+  return(temp_col)
+}
+
+
+
+#' When read in CSVs using fread, " usually being read in as "", this function fixes it
+#' @param temp_col column to perform this operation
+#' @export
+dt.double_quote_fix <- function(temp_col){
+  temp_col <- gsub("\"\"","\"",temp_col, fixed = T)
 }
 
 #' @export BasicSettings
