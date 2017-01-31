@@ -194,4 +194,14 @@ dt.double_quote_fix <- function(temp_col){
   temp_col <- gsub("\"\"","\"",temp_col, fixed = T)
 }
 
+#' Apply proper case to this string / column
+#' @param x column to perform this operation
+#' @export
+simpleCap <- function(x) {
+  s <- strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1,1)), substring(s, 2),
+        sep="", collapse=" ")
+}
+
+
 #' @export BasicSettings
