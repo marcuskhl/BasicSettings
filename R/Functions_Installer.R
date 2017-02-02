@@ -241,11 +241,8 @@ fn.is.dt.end <- function(df, dt_flag){
 #' @export
 df.c2f <- function(df){
   df <- fn.is.dt.start(df)
-  for(i in 1:dim(df)[2]){
-    if(class(df[,i])=="character"){
-      df[,i] <- as.factor(df[,i])
-    }
-  }
+  temp_list <- df.col.select(df, "character")
+  df[,temp_list] <- lapply(df[,temp_list], factor)
   return(fn.is.dt.end(df,dt_flag))
 }
 
