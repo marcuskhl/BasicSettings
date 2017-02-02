@@ -216,6 +216,7 @@ size_cat_gen <- function(df, col_name ,range){
 #' This function is mainly for internal use so I wont export it right now
 #' Checks if the table is a df or a dt
 #' @param df a data.frame or data.table
+#' @export
 fn.is.dt.start <- function(df){
   dt_flag <<- F
   if (class(df)[1] == 1) {
@@ -227,6 +228,7 @@ fn.is.dt.start <- function(df){
 
 #' complimentary to the function above
 #' @param dt_flag is a variable produced in the function above
+#' @export
 fn.is.dt.end <- function(df, dt_flag){
   if(dt_flag){
     return(as.dt(df))
