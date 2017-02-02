@@ -272,4 +272,26 @@ df.class.extract <- function(df, class_type){
   }
 }
 
+
+#' This function generates a range based on a column and a specified range, remember to change the new column name to your choice 
+#' @param df data frame
+#' @param col_ref double quoted column reference
+#' @param range the range that you want to generate
+#' @examples 
+#' col_ref = "Size", range = 5. this will find the column Size in the df supplied and generate size ranges of 5 inch, 25-30, 30-35
+range_gen <- function(df, col_ref, range){
+  df <- fn.is.dt.start(df)
+  if(class(df[,match(col_ref, names(df))])!= "numeric"){print("worng class")}else{
+    col <- df[,match(col_ref, names(df))]
+    lower <- floor(col/range)*range
+    upper <- ceiling(col/range)*range -1 # have error, next line is the patch
+    upper[lower==(upper+1)] <- upper[lower==(upper+1)] +range
+    new_col <- paste0(lower, "\"-", upper,  "\"")
+    new_col <- as.df(f2c(new_col))
+    names(new_col) <- paste0("Size Group (", range, "-inch)")
+    df <- cbind.data.frame(df, new_col)
+    return(fn.is.dt.end(df,dt_flag))
+  }
+}
+
 #' @export BasicSettings
