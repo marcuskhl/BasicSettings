@@ -240,10 +240,10 @@ fn.is.dt.end <- function(df, dt_flag){
 #' This function converts the character columns into factor, useful in visualising correlation matrix
 #' @export
 df.c2f <- function(df){
-  df <- fn.is.dt.start(df)
+  df <- BasicSettings:::fn.is.dt.start(df)
   temp_list <- df.col.select(df, "character")
   df[,temp_list] <- lapply(df[,temp_list], factor)
-  return(fn.is.dt.end(df,dt_flag))
+  return(BasicSettings:::fn.is.dt.end(df,dt_flag))
 }
 
 
@@ -262,11 +262,11 @@ df.col.select <- function(df, class_type){
 #' @param class_type either "numeric", "character" or "factor"
 #' @export
 df.class.extract <- function(df, class_type){
-  df <- fn.is.dt.start(df)
+  df <- BasicSettings:::fn.is.dt.start(df)
   if(Reduce("|", grepl(class_type, c("numeric", "character", "factor")))){
     temp_list <- df.col.select(df, class_type)
     new_df <-df[ , temp_list]
-    return(fn.is.dt.end(new_df,dt_flag))
+    return(BasicSettings:::fn.is.dt.end(new_df,dt_flag))
   }else{
     print("Unsupported Type")
   }
@@ -280,7 +280,7 @@ df.class.extract <- function(df, class_type){
 #' @examples 
 #' col_ref = "Size", range = 5. this will find the column Size in the df supplied and generate size ranges of 5 inch, 25-30, 30-35
 range_gen <- function(df, col_ref, range){
-  df <- fn.is.dt.start(df)
+  df <- BasicSettings:::fn.is.dt.start(df)
   if(class(df[,match(col_ref, names(df))])!= "numeric"){print("worng class")}else{
     col <- df[,match(col_ref, names(df))]
     lower <- floor(col/range)*range
@@ -290,7 +290,7 @@ range_gen <- function(df, col_ref, range){
     new_col <- as.df(f2c(new_col))
     names(new_col) <- paste0("Size Group (", range, "-inch)")
     df <- cbind.data.frame(df, new_col)
-    return(fn.is.dt.end(df,dt_flag))
+    return(BasicSettings:::fn.is.dt.end(df,dt_flag))
   }
 }
 
