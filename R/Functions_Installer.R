@@ -254,12 +254,13 @@ df.c2f <- function(df){
 df.class.extract <- function(df, class_type){
   df <- fn.is.dt.start(df)
   if(Reduce("|", grepl(class_type, c("numeric", "character", "factor")))){
-    print("Unsupported Type")
-  }else{
     temp_function <- get(paste0("as.", class_type))
+    temp_list <- sapply(df, temp_function)
+    new_df <-df[ , temp_list]
+    return(fn.is.dt.end(new_df,dt_flag))
+  }else{
+    print("Unsupported Type")
   }
-  temp_list <- sapply(df, temp_function)
-  new_df <-df[ , temp_list]
-  return(fn.is.dt.end(new_df,dt_flag))
+  
 }
 #' @export BasicSettings
