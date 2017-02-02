@@ -194,14 +194,72 @@ dt.double_quote_fix <- function(temp_col){
   temp_col <- gsub("\"\"","\"",temp_col, fixed = T)
 }
 
-#' Apply proper case to this string / column
-#' @param x column to perform this operation
+
+#' This function generates size range
+#' @param df df you want to generate size cat
+#' @param col_name Size column name of in df you want to generate range for
+#' @param range the window of size range, eg. 5 means say 10"-15" & 15"-20"
 #' @export
-simpleCap <- function(x) {
-  s <- strsplit(x, " ")[[1]]
-  paste(toupper(substring(s, 1,1)), substring(s, 2),
-        sep="", collapse=" ")
+size_cat_gen <- function(df, col_name ,range){
+  if(class(df$`Screen Size`)!= "numeric"){print("worng class")}else{
+    col <- df$`Screen Size`
+    lower <- floor(col/range)*range
+    upper <- ceiling(col/range)*range -1 # have error, next line is the patch
+    upper[floor(col/range)*range==ceiling(col/range)*range] <- upper[floor(col/range)*range==ceiling(col/range)*range] +range
+    new_col <- paste0(lower, "\"-", upper,  "\"")
+    new_col <- as.df(new_col)
+    names(new_col) <- paste0("Size Group (", range, "-inch)")
+    return(cbind.data.frame(df, new_col))
+  }
+}
+
+#' This function is mainly for internal use so I wont export it right now
+#' Checks if the table is a df or a dt
+#' @param df a data.frame or data.table
+fn.is.dt.start <- function(df){
+  dt_flag <<- F
+  if (class(df)[1] == 1) {
+    df <- as.df(df)
+    dt_flag <<- T
+  }
+  return(df)
+}
+
+#' complimentary to the function above
+#' @param dt_flag is a variable produced in the function above
+fn.is.dt.end <- function(df, dt_flag){
+  if(dt_flag){
+    return(as.dt(df))
+  }else{
+    return(df)
+  }
 }
 
 
+#' This function converts the character columns into factor, useful in visualising correlation matrix
+#' @export
+df.c2f <- function(df){
+  df <- fn.is.dt.start(df)
+  for(i in 1:dim(df)[2]){
+    if(class(df[,i])=="character"){
+      df[,i] <- as.factor(df[,i])
+    }
+  }
+  return(fn.is.dt.end(df,dt_flag))
+}
+
+#' This function extracts only columns that are either numeric, character or factor
+#' @param class_type either "numeric", "character" or "factor"
+#' @export
+df.class.extract <- function(df, class_type){
+  df <- fn.is.dt.start(df)
+  if(Reduce("|", grepl(class_type, c("numeric", "character", "factor")))){
+    print("Unsupported Type")
+  }else{
+    temp_function <- get(paste0("as.", class_type))
+  }
+  temp_list <- sapply(df, temp_function)
+  new_df <-df[ , temp_list]
+  return(fn.is.dt.end(new_df,dt_flag))
+}
 #' @export BasicSettings
