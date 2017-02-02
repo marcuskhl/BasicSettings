@@ -236,6 +236,7 @@ fn.is.dt.end <- function(df, dt_flag){
 }
 
 
+
 #' This function converts the character columns into factor, useful in visualising correlation matrix
 #' @export
 df.c2f <- function(df){
@@ -248,18 +249,30 @@ df.c2f <- function(df){
   return(fn.is.dt.end(df,dt_flag))
 }
 
+
+
+#' This function extracts only columns references that are either numeric, character or factor
+#' @param class_type either "numeric", "character" or "factor"
+#' @export
+df.col.select <- function(df, class_type){
+  temp_function <- get(paste0("is.", class_type))
+  return(sapply(df, temp_function))
+}
+
+
+
 #' This function extracts only columns that are either numeric, character or factor
 #' @param class_type either "numeric", "character" or "factor"
 #' @export
 df.class.extract <- function(df, class_type){
   df <- fn.is.dt.start(df)
   if(Reduce("|", grepl(class_type, c("numeric", "character", "factor")))){
-    temp_function <- get(paste0("is.", class_type))
-    temp_list <- sapply(df, temp_function)
+    temp_list <- df.col.select(df, class_type)
     new_df <-df[ , temp_list]
     return(fn.is.dt.end(new_df,dt_flag))
   }else{
     print("Unsupported Type")
   }
 }
+
 #' @export BasicSettings
