@@ -281,6 +281,7 @@ df.class.extract <- function(df, class_type){
 #' @param range the range that you want to generate
 #' @examples 
 #' col_ref = "Size", range = 5. this will find the column Size in the df supplied and generate size ranges of 5 inch, 25-30, 30-35
+#' @export
 range_gen <- function(df, col_ref, range){
   df <- BasicSettings:::fn.is.dt.start(df)
   if(class(df[,match(col_ref, names(df))])!= "numeric"){print("worng class")}else{
