@@ -98,28 +98,48 @@ save.xlsx <- function (file, ...)
 #' new_names <- c("test1","test2","test3")
 #' range_match = F
 #' @export
-df.name.change <- function(df, original_names, new_names, range_match = F, fixed = F, invert = F){
+df.name.change <- function (df, original_names, new_names, range_match = F, fixed = F, invert = F) {
   fn_flag <- F
-  if (class(df)[1]==1){
+  if (class(df)[1] == 1) {
     df <- as.df(df)
     fn_flag <- T
   }
-  if (range_match){
-    if(invert){
-      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
-    }else{
-      if(length(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert))!= length(new_names)){
+  if (range_match) {
+    if (invert) {
+      names(df)[match(grep(paste(original_names, collapse = "|"),
+                           names(df),
+                           value = T,
+                           fixed = fixed, invert = invert),
+                      names(df))] <- new_names
+    }
+    else {
+      if (length(grep(paste(original_names, collapse = "|"),
+                      names(df), value = T, fixed = fixed, invert = invert)) != length(new_names)) {
         print("#' of matched names not equal to #' of new names")
       }
-      names(df)[match(grep(paste(original_names,collapse="|"), names(df), value = T, fixed = fixed, invert = invert), names(df))] <- new_names
+      for (i in 1: (length(original_names))){
+        names(df)[grep(original_names[i], names(df), fixed = T)] <- new_names[i]
+      }
+      # This yields the wrong order
+      # names(df)[match(grep(paste(original_names, collapse = "|"),
+      #                      names(df),
+      #                      value = T,
+      #                      fixed = fixed, invert = invert),
+      #                 names(df))] <- new_names
     }
-  }else{
-    if(length(match(original_names, names(df)))!= length(new_names)){
+  }
+  else {
+    if (length(match(original_names, names(df))) != length(new_names)) {
       print("#' of matched names not equal to #' of new names")
     }
     names(df)[match(original_names, names(df))] <- new_names
   }
-  if(fn_flag){return(as.dt(df))}else{return(df)}
+  if (fn_flag) {
+    return(as.dt(df))
+  }
+  else {
+    return(df)
+  }
 }
 
 #' This is a piper for functions
@@ -152,6 +172,129 @@ source_https <- function(url, ...) {
   sapply(c(url, ...), function(u) {
     eval(parse(text = getURL(u, followlocation = TRUE, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))), envir = .GlobalEnv)
   })
+}
+
+
+
+#' Sometimes when reading in < and >, it gets encoded differently, this function fixes it
+#' @param temp_col column to perform this operation
+#' @export
+size.encoder <- function(temp_col){
+  temp_col <- gsub("&gt;", ">",temp_col, fixed = T)
+  temp_col <- gsub("&lt;", "<",temp_col, fixed = T)
+  return(temp_col)
+}
+
+
+
+#' When read in CSVs using fread, " usually being read in as "", this function fixes it
+#' @param temp_col column to perform this operation
+#' @export
+dt.double_quote_fix <- function(temp_col){
+  temp_col <- gsub("\"\"","\"",temp_col, fixed = T)
+}
+
+
+#' This function generates size range
+#' @param df df you want to generate size cat
+#' @param col_name Size column name of in df you want to generate range for
+#' @param range the window of size range, eg. 5 means say 10"-15" & 15"-20"
+#' @export
+size_cat_gen <- function(df, col_name ,range){
+  if(class(df$`Screen Size`)!= "numeric"){print("worng class")}else{
+    col <- df$`Screen Size`
+    lower <- floor(col/range)*range
+    upper <- ceiling(col/range)*range -1 # have error, next line is the patch
+    upper[floor(col/range)*range==ceiling(col/range)*range] <- upper[floor(col/range)*range==ceiling(col/range)*range] +range
+    new_col <- paste0(lower, "\"-", upper,  "\"")
+    new_col <- as.df(new_col)
+    names(new_col) <- paste0("Size Group (", range, "-inch)")
+    return(cbind.data.frame(df, new_col))
+  }
+}
+
+#' This function is mainly for internal use so I wont export it right now
+#' Checks if the table is a df or a dt
+#' @param df a data.frame or data.table
+#' @export
+fn.is.dt.start <- function(df){
+  dt_flag <<- F
+  if (class(df)[1] == 1) {
+    df <- as.df(df)
+    dt_flag <<- T
+  }
+  return(df)
+}
+
+#' complimentary to the function above
+#' @param dt_flag is a variable produced in the function above
+#' @export
+fn.is.dt.end <- function(df, dt_flag){
+  if(dt_flag){
+    return(as.dt(df))
+  }else{
+    return(df)
+  }
+}
+
+
+
+#' This function converts the character columns into factor, useful in visualising correlation matrix
+#' @export
+df.c2f <- function(df){
+  df <- BasicSettings:::fn.is.dt.start(df)
+  temp_list <- df.col.select(df, "character")
+  df[,temp_list] <- lapply(df[,temp_list], factor)
+  return(BasicSettings:::fn.is.dt.end(df,dt_flag))
+}
+
+
+
+#' This function extracts only columns references that are either numeric, character or factor
+#' @param class_type either "numeric", "character" or "factor"
+#' @export
+df.col.select <- function(df, class_type){
+  temp_function <- get(paste0("is.", class_type))
+  return(sapply(df, temp_function))
+}
+
+
+
+#' This function extracts only columns that are either numeric, character or factor
+#' @param class_type either "numeric", "character" or "factor"
+#' @export
+df.class.extract <- function(df, class_type){
+  df <- BasicSettings:::fn.is.dt.start(df)
+  if(Reduce("|", grepl(class_type, c("numeric", "character", "factor")))){
+    temp_list <- df.col.select(df, class_type)
+    new_df <-df[ , temp_list]
+    return(BasicSettings:::fn.is.dt.end(new_df,dt_flag))
+  }else{
+    print("Unsupported Type")
+  }
+}
+
+
+#' This function generates a range based on a column and a specified range, remember to change the new column name to your choice 
+#' @param df data frame
+#' @param col_ref double quoted column reference
+#' @param range the range that you want to generate
+#' @examples 
+#' col_ref = "Size", range = 5. this will find the column Size in the df supplied and generate size ranges of 5 inch, 25-30, 30-35
+#' @export
+range_gen <- function(df, col_ref, range){
+  df <- BasicSettings:::fn.is.dt.start(df)
+  if(class(df[,match(col_ref, names(df))])!= "numeric"){print("worng class")}else{
+    col <- df[,match(col_ref, names(df))]
+    lower <- floor(col/range)*range
+    upper <- ceiling(col/range)*range -1 # have error, next line is the patch
+    upper[lower==(upper+1)] <- upper[lower==(upper+1)] +range
+    new_col <- paste0(lower, "\"-", upper,  "\"")
+    new_col <- as.df(f2c(new_col))
+    names(new_col) <- paste0("Size Group (", range, "-inch)")
+    df <- cbind.data.frame(df, new_col)
+    return(BasicSettings:::fn.is.dt.end(df,dt_flag))
+  }
 }
 
 #' @export BasicSettings
