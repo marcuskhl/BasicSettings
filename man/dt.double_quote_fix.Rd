@@ -12,4 +12,3 @@ dt.double_quote_fix(temp_col)
 \description{
 When read in CSVs using fread, " usually being read in as "", this function fixes it
 }
-

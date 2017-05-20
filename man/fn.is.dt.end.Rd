@@ -12,4 +12,3 @@ fn.is.dt.end(df, dt_flag)
 \description{
 complimentary to the function above
 }
-

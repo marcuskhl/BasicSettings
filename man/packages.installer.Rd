@@ -9,4 +9,3 @@ packages.installer()
 \description{
 installs necessary packages
 }
-

@@ -16,4 +16,3 @@ size_cat_gen(df, col_name, range)
 \description{
 This function generates size range
 }
-

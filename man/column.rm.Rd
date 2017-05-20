@@ -19,4 +19,3 @@ returns the data frame without the specified columns
 This function removes columns from a table
 pass in the df and the column and it will return a column without the mentioned column(s)
 }
-

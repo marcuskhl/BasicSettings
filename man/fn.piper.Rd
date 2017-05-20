@@ -23,4 +23,3 @@ custom_fn <- fn.piper(is.numeric, length, unique)
 custom_fn(rep(1:5, 1:5)) would be TRUE
 
 }
-

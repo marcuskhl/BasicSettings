@@ -14,4 +14,3 @@ https://gist.github.com/jimhester/a060323a05b40c6ada34
 \examples{
 df <- insensitive.join(left_join)(df_x, df_y, by = list(x = c(), y = c()))
 }
-

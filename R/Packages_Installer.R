@@ -5,7 +5,8 @@ packages.installer <- function(){
     "XML", "rvest", "jsonlite", "rjson",
     # Misc Tools:
     "Hmisc", "MASS",
-
+    # Web Analytics Tools:
+    "googleAnalyticsR",
     # Data Manipulation Tools:
     "reshape2","dplyr","dplyr", "dtplyr", "tidyr", "janitor", "data.table","magrittr",# does not have reshape1
     # Modelling Tools:

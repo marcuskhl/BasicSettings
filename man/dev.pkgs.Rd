@@ -9,4 +9,3 @@ dev.pkgs()
 \description{
 Seconday packages installer, used only by developers
 }
-

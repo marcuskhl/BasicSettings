@@ -4,7 +4,7 @@
 \alias{rbind.fill.DT}
 \title{This function does an rbind.fill / smartbind on a list of data.frames}
 \usage{
-rbind.fill.DT(ll)
+\method{rbind}{fill.DT}(ll)
 }
 \arguments{
 \item{ll}{list of data frames}
@@ -15,4 +15,3 @@ This function does an rbind.fill / smartbind on a list of data.frames
 \examples{
 huge_df <- rbind.fill.DT(list_of_dfs)
 }
-

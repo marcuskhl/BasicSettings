@@ -15,4 +15,3 @@ This function converts factor column to numeric (usually applicable to year)
 \examples{
 x$abc <- f2n(x$abc)
 }
-

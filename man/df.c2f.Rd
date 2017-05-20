@@ -9,4 +9,3 @@ df.c2f(df)
 \description{
 This function converts the character columns into factor, useful in visualising correlation matrix
 }
-

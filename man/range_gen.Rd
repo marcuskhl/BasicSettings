@@ -19,4 +19,3 @@ This function generates a range based on a column and a specified range, remembe
 \examples{
 col_ref = "Size", range = 5. this will find the column Size in the df supplied and generate size ranges of 5 inch, 25-30, 30-35
 }
-

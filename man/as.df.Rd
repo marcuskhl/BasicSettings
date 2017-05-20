@@ -12,4 +12,3 @@ as.df(dt)
 \description{
 shorter version of as.data.frame
 }
-

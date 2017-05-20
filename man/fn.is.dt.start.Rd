@@ -14,4 +14,3 @@ fn.is.dt.start(df)
 This function is mainly for internal use so I wont export it right now
 Checks if the table is a df or a dt
 }
-

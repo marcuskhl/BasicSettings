@@ -12,4 +12,3 @@ size.encoder(temp_col)
 \description{
 Sometimes when reading in < and >, it gets encoded differently, this function fixes it
 }
-

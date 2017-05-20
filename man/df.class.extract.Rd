@@ -12,4 +12,3 @@ df.class.extract(df, class_type)
 \description{
 This function extracts only columns that are either numeric, character or factor
 }
-

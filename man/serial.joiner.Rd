@@ -17,4 +17,3 @@ this function join multiple dfs using dplyr
 \examples{
 df <- insensitive.join(left_join, list(df_x,df_y,df_z))
 }
-

@@ -14,4 +14,3 @@ This function converts factor column to char
 \examples{
 x$abc <- f2c(x$abc)
 }
-
