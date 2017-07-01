@@ -10,7 +10,7 @@ packages.installer <- function(){
     # Data Manipulation Tools:
     "reshape2","dplyr","dplyr", "dtplyr", "tidyr", "janitor", "data.table","magrittr",# does not have reshape1
     # Modelling Tools:
-    "psych", "gmodels", "caret", "ROCR", "cluster", "broom", "corrplot", "randomForest", "nnet",
+    "psych", "gmodels", "caret", "ROCR", "cluster", "broom", "corrplot", "randomForest", "nnet", "forecast",
     # Multithreading:
     "foreach", "doParallel",
     # Input-Output:
