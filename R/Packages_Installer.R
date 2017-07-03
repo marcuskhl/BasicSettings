@@ -4,7 +4,7 @@ packages.installer <- function(){
     # Web Scraping Tools:
     "XML", "rvest", "jsonlite", "rjson",
     # Misc Tools:
-    "Hmisc", "MASS",
+    "Hmisc", "MASS", 
     # Web Analytics Tools:
     "googleAnalyticsR",
     # Data Manipulation Tools:
@@ -16,7 +16,7 @@ packages.installer <- function(){
     # Input-Output:
     "sqldf", "RODBC", "readxl","openxlsx", "rio", "readr",
     # Misc:
-    "zoo", "lubridate", "profvis", "scales", "RColorBrewer", "purrr"
+    "zoo", "lubridate", "profvis", "scales", "RColorBrewer", "purrr", "httr"
   )
 
   update_and_install <- function(list.of.packages){
