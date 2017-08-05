@@ -28,8 +28,8 @@ packages.installer <- function(){
   update_and_install(list.of.packages)
 
 
-  cl <- makeCluster(4)  # might have to change it back to 2 for crappy laptops
-  registerDoParallel(cl)
+  # cl <- makeCluster(4)  # might have to change it back to 2 for crappy laptops
+  # registerDoParallel(cl)
 
 
   # For hardcore performance entheusiasts
