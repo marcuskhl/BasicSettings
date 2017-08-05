@@ -4,7 +4,7 @@ packages.installer <- function(){
     # Web Scraping Tools:
     "XML", "rvest", "jsonlite", "rjson",
     # Misc Tools:
-    "Hmisc", "MASS", 
+    "Hmisc", "MASS",
     # Web Analytics Tools:
     "googleAnalyticsR",
     # Data Manipulation Tools:
@@ -23,7 +23,7 @@ packages.installer <- function(){
     new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
     update.packages(installed.packages()[,"Package"])
     if(length(new.packages)) install.packages(new.packages,depen=T)
-    lapply(list.of.packages, library, character.only = TRUE)
+    lapply(list.of.packages, require, character.only = TRUE)
   }
   update_and_install(list.of.packages)
 
