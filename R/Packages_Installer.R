@@ -22,7 +22,9 @@ packages.installer <- function(){
   update_and_install <- function(list.of.packages){
     new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
     update.packages(installed.packages()[,"Package"])
-    if(length(new.packages)) install.packages(new.packages,depen=T)
+    if(length(new.packages)) install.packages(new.packages, dependencies=T,
+                                              lib = .libPaths()[1]
+                                              )
     lapply(list.of.packages, require, character.only = TRUE)
   }
   update_and_install(list.of.packages)
